@@ -1,0 +1,45 @@
+<!--INDEX.HTML-->
+<!DOCTYPE html>
+<html>
+<head>
+   <title>CKEditor Preview Plugin</title>
+</head>
+<body>
+	<textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
+
+	<script type="text/javascript" src="./js/jquery.min.js"></script>  
+	<script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+	<script type="text/javascript">
+	(function(window, undefined){
+		$(document).ready(function() {
+
+			CKEDITOR.replace('editor1');
+
+			CKEDITOR.config.extraPlugins = "previewSizes";
+
+			CKEDITOR.plugins.add('previewSizes',
+			{
+				init: function(editor)
+				{
+					editor.addCommand('previewSizesNewWindow',
+					{
+						exec : function(editor) 
+						{
+							var win = window.open("./visualizador.html", '_blank');
+							win.focus();
+						}
+					});
+					editor.ui.addButton('previewSizes',
+					{
+						label: 'Visualizar en diferentes tama&ntilde;os',
+						command: 'previewSizesNewWindow',
+						icon: '../img/screen.png',
+						toolbar: 'document'
+					});
+				}
+			});
+		});
+	})(window);
+	</script>
+</body>
+</html>
